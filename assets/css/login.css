@@ -1,0 +1,33 @@
+/* se aplica a todos los formularios */
+input:focus:invalid {
+	box-shadow: 0 0 5px 1px red;
+}
+
+/* se le aplica a la imagen corporativa */
+.img_corp {
+	/* Arriba | Derecha | Abajo | Izquierda */
+	margin: 4px 20px 4px 10px;
+	border-radius: 50px;
+}
+
+/* se le aplica estilos al login */
+#div {
+	width: 350px;
+	margin: 80px auto;
+	border: 2px solid black;
+	border-radius: 10px;
+	padding-bottom: 10px;
+	background-color: #f5f5f5;
+}
+
+#error {
+	color: red;
+	text-align: center;
+}
+
+@media screen and (max-width: 850px){
+#div {
+	width: 300px;
+	margin: 80px auto;
+}
+}
