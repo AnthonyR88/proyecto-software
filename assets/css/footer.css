@@ -1,0 +1,48 @@
+/* se le aplica al footer */
+div.cuerpo {
+	background-color: #5e2129;
+	display: flex;
+	color: white;
+}
+img.logo {
+	margin: 10px 20px;
+	border-radius: 50px;
+}
+
+#imagen {
+	margin: 0px 10px;
+	border-radius: 50px;
+}
+
+div.copy {
+	color: white;
+	text-align: center;
+	background-color: #323be3;
+	padding-bottom: 1px;
+	padding-top: 10px;
+}
+.columna1 {
+	margin: auto auto;
+	padding: 20px 20px;
+}
+.columna2 {
+	margin: 0px auto;
+	padding: 20px 20px;
+}
+.columna3 {
+	margin: 0px auto;
+	padding: 20px 20px;
+}
+
+@media screen and (max-width: 850px){
+
+	div.cuerpo {
+		display: block;
+	}
+	.columna2{
+		text-align: center;
+	}
+	.columna3 {	
+		text-align: center;
+	}
+}

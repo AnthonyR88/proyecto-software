@@ -1,0 +1,28 @@
+/* se le aplica a la imagen del colegio */
+#imagen_colegio {
+	width: 100%;
+}
+
+/* se le aplica a la imagen corporativa */
+.img_corp {
+	/* Arriba | Derecha | Abajo | Izquierda */
+	margin: 4px 20px 4px 10px;
+	border-radius: 50px;
+}
+
+/* se le aplica a el contenedor del usuario y cerrar sesion */
+#usuario {
+	float: right;
+}
+
+/* se le aplica al texto del usuario */
+#texto {
+	text-align: center;
+	color: white;
+	margin: auto 0px;
+}
+
+/* se le aplica al texto de cerrar sesion */
+#link {
+	color: white;
+}
