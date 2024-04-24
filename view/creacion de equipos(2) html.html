@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Equipo</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            width: 300px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label {
+            margin-top: 10px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <form id="crearEquipoForm" action="/crear_equipo" method="POST">
+        <h1>Crear Equipo</h1>
+        <label for="nombre">Nombre del Equipo:</label><br>
+        <input type="text" id="nombre" name="nombre" required><br>
+        <label for="estadio">Estadio:</label><br>
+        <select id="estadio" name="estadio" required>
+            <option value="1">Estadio 1</option>
+            <option value="2">Estadio 2</option>
+            <option value="3">Estadio 3</option>
+            <!-- Puedes cargar dinámicamente los estadios desde la base de datos -->
+        </select><br>
+        <label for="fundacion">Fecha de Fundación:</label><br>
+        <input type="date" id="fundacion" name="fundacion" required><br>
+        <label for="entrenador">Entrenador:</label><br>
+        <input type="text" id="entrenador" name="entrenador" required><br><br>
+        <button type="submit">Crear Equipo</button>
+    </form>
+</body>
+</html>
