@@ -59,9 +59,9 @@ class Estadio
     }
 
     /* Función que permite inactivar un estadio */
-    public function Inactivar_Estadio($nombre)
+    public function Inactivar_Estadio($Cod)
     {      
-        $sql = "CALL SP_Inactivate_Estadio('$nombre')";
+        $sql = "CALL SP_Inactivate_Estadios($Cod)";
         if (sql_accion($sql)) 
         {
             return true;

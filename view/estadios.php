@@ -201,7 +201,7 @@ include('navbar.php');
                 <th>Dirección</td>
                 <th>Capacidad</td>
                 <th>Edición</td>
-                
+                <th>Inactivación</td>
 	        </tr>
 	    </thead>
         <tbody>
@@ -223,7 +223,7 @@ include('navbar.php');
                 	<td><?php echo $estadio[3] ?></td>
                 	<td><?php echo $estadio[4] ?></td>
                 	<td><a href="estadios.php?Modificar='<?php echo $estadio[0] ?>'" class='btn btn-warning'>Editar</a></td>
-                	
+                	<td><a onclick="return confirm('¿Estas seguro de Inactivar este registro?');" href="../controller/controlador_estadios.php?Inactivar='<?php echo $estadio[0] ?>'" class='btn btn-danger'>Inactivar</a></td>
                 </tr>
                 <?php
             }

@@ -84,3 +84,11 @@ DELIMITER ;
 CREATE VIEW VIEW_Select_Estadios AS
 SELECT EST_ID, EST_Nombre, EST_Ciudad, EST_Direccion, EST_Capacidad FROM Estadios
 WHERE EST_Estado = 'A';
+
+/* Inactiva un registro en la tabla Estadios */
+DELIMITER $$
+CREATE PROCEDURE SP_Inactivate_Estadios(IN Cod INT)
+BEGIN 
+UPDATE Estadios SET EST_Estado = 'I' WHERE EST_ID = Cod;
+END $$
+DELIMITER ;

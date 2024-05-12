@@ -87,14 +87,14 @@ if (isset($_GET['Inactivar']) AND $_SESSION['Cargo'] == 'Administrador')
 {
 	$id = $_GET['Inactivar'];
 
-	$mysqli_inactivar = new Usuario();
-	if ($mysqli_inactivar->Inactivar_Usuario($id)) 
+	$mysqli_inactivar = new Estadio();
+	if ($mysqli_inactivar->Inactivar_Estadio($id)) 
 	{
-		$_SESSION['aviso'] = "<script type='text/javascript'> alert('Usuario Inactivado con Éxito'); </script>";
+		$_SESSION['aviso'] = "<script type='text/javascript'> alert('Estadio Inactivado con Éxito'); </script>";
 	}
 	else
 	{
-		$_SESSION['aviso'] = "<script type='text/javascript'> alert('Error, No se pudo Inactivar el Usuario'); </script>";
+		$_SESSION['aviso'] = "<script type='text/javascript'> alert('Error, No se pudo Inactivar el Estadio'); </script>";
 	}
 
 	/* Redidige a la vista de usuario */
