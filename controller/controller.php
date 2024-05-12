@@ -47,37 +47,11 @@ function sql_accion($sql)
 }
 
 /* Funcion para consultar y mostrar informacion de los usuarios */
-class Validate_User
+class Validate_Estadio
 {
-    function Check_User_Insert($user)
+    function Check_Estadio_Update($Cod)
     {
-        $sql = " SELECT COUNT(*) FROM usuarios WHERE USU_Cod = '$user' ";
-        if ($fila = sql_consulta1($sql)) 
-        {
-            return($fila);
-        }    
-        else
-        {
-            return(false);
-        }
-    }
-
-    function Check_Client($id)
-    {
-        $sql = " SELECT COUNT(*) FROM clientes WHERE CLI_Ident = '$id' ";
-        if ($fila = sql_consulta1($sql)) 
-        {
-            return($fila);
-        }    
-        else
-        {
-            return(false);
-        }
-    }
-
-    function Check_User_Update($user)
-    {
-        $sql = " SELECT COUNT(*) FROM usuarios WHERE USU_Cod = '$user' ";
+        $sql = " SELECT COUNT(*) FROM Estadios WHERE EST_ID = $Cod ";
         if ($fila = sql_consulta1($sql)) 
         {
             return($fila);

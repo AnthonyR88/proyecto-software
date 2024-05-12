@@ -1,5 +1,8 @@
 <?php
 
+session_start();
+require_once('../controller/controller.php');
+
 ?>
 
 <!-- le dice al navegador que se esta usando la ultima verion de html -->
@@ -9,7 +12,7 @@
 <!-- cabeza del documento html -->
 <head>
 	<!-- titulo del documento -->
-	<title>Tu Mejor Veterinaria</title>
+	<title>Campeonatos Futbol</title>
 	<!-- icono de la pagina web -->
 	<link rel="icon" href="imagenes/logo1.ico">
 	<!-- evita errores de tildes y ñ -->

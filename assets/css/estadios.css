@@ -1,0 +1,34 @@
+/* se aplica a todos los formularios */
+input:focus:invalid {
+	box-shadow: 0 0 5px 1px red;
+}
+
+/* se le aplica al formulario principal */
+form {
+	width: 350px;
+	margin: 20px auto;
+}
+
+/* se le aplica al titulo del metodo */
+h1 {
+	text-align: center;
+	margin: 20px;
+}
+
+/* se le aplica a los botones */
+#boton {
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+#botones {
+	margin: 5px auto;
+}
+
+#tabla {
+	margin: 20px auto;
+}
+
+#enlace {
+	color: white;
+}
