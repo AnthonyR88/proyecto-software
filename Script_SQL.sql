@@ -85,6 +85,7 @@ CREATE VIEW VIEW_Select_Estadios AS
 SELECT EST_ID, EST_Nombre, EST_Ciudad, EST_Direccion, EST_Capacidad FROM Estadios
 WHERE EST_Estado = 'A';
 
+/* Scripts Historia De Usuario HU14 */
 /* Inactiva un registro en la tabla Estadios */
 DELIMITER $$
 CREATE PROCEDURE SP_Inactivate_Estadios(IN Cod INT)
