@@ -50,7 +50,7 @@ else
         ?>
         <!-- link de navegabilidad -->
         <li class="nav-item <?php if($nav==3){ echo 'active'; } ?> ">
-            <a class="nav-link" href="servicios.php">Campeonato</a>
+            <a class="nav-link" href="campeonatos.php">Campeonato</a>
         </li>
         <?php
         }
