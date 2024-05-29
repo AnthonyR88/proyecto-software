@@ -63,10 +63,10 @@ class Validate_Estadio
     }
 }
 
-/* Funcion que consulta todos los cargos para ponerlos en una lista */ 
-function Roles()
+/* Funcion que consulta todos los equipos del campeonato para ponerlos en una lista */ 
+function Equipos()
 {
-    $sql = " SELECT * FROM VIEW_Select_Roles ";
+    $sql = " SELECT * FROM VIEW_Select_Equipos ";
     $res = sql_consulta2($sql);
     return($res);
 }

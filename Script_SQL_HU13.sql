@@ -7,6 +7,17 @@ CREATE TABLE Estadios (
 	EST_Estado CHAR(1) NOT NULL
 );
 
+INSERT INTO Estadios() VALUES(null, 'El Campin', 'Bogotá', 'Calle 1', 35000, 'A');
+INSERT INTO Estadios() VALUES(null, 'Techo', 'Bogotá', 'Calle 10', 10000, 'A');
+INSERT INTO Estadios() VALUES(null, 'Atanasio Girardot', 'Medellín', 'Calle 3', 32000, 'A');
+INSERT INTO Estadios() VALUES(null, 'Pascual Guerrero', 'Cali', 'Calle 30', 28000, 'A');
+INSERT INTO Estadios() VALUES(null, 'Palmaseca', 'Cali', 'Calle 40', 23000, 'A');
+INSERT INTO Estadios() VALUES(null, 'Metropolitano', 'Barranquilla', 'Calle 15', 45000, 'A');
+INSERT INTO Estadios() VALUES(null, 'Hernán Ramirez', 'Pereira', 'Calle 34', 27000, 'A');
+INSERT INTO Estadios() VALUES(null, 'Palo Negro', 'Manizales', 'Calle 25', 30000, 'A');
+INSERT INTO Estadios() VALUES(null, 'Manuel Murillo', 'Ibagué', 'Calle 55', 21000, 'A');
+INSERT INTO Estadios() VALUES(null, 'General Santander', 'Cúcuta', 'Calle 0', 33000, 'A');
+
 /* Ingresa un Registro en la tabla Estadios */
 DELIMITER $$
 CREATE PROCEDURE SP_Insert_Estadio(IN Nombre VARCHAR(50), IN Ciudad VARCHAR(50), IN Direccion VARCHAR(40), IN Capacidad NUMERIC(6,0))
