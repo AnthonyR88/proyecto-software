@@ -11,6 +11,10 @@ CREATE TABLE Equipos (
 	EQU_Estado CHAR(1) NOT NULL
 );
 
+/* Consulta todos los registros de la tabla Estadios */
+CREATE VIEW VIEW_Select_Equipos AS
+SELECT EQU_ID, EQU_Nombre FROM Equipos WHERE EQU_Estado = 'A' ORDER BY EQU_Nombre;
+
 INSERT INTO Equipos() VALUES(null, 'Millonarios', 'Bogotá', 2000, 'Azul y Blanco', 1, 1, 'A');
 INSERT INTO Equipos() VALUES(null, 'Santa Fe', 'Bogotá', 2000, 'Rojo y Blanco', 1, 1, 'A');
 INSERT INTO Equipos() VALUES(null, 'La Equidad', 'Bogotá', 2000, 'Verde y Blanco', 1, 2, 'A');
@@ -84,9 +88,34 @@ CREATE TABLE Rel_Camp_Equi (
 	RCE_Equipo INTEGER NOT NULL
 );
 
-/* Consulta todos los registros de la tabla Estadios */
-CREATE VIEW VIEW_Select_Equipos AS
-SELECT EQU_ID, EQU_Nombre FROM Equipos WHERE EQU_Estado = 'A' ORDER BY EQU_Nombre;
+/* Consulta Equipos De Un Campeonato */
+DELIMITER $$
+CREATE PROCEDURE SP_Select_CampEqu(IN Cod INT)
+BEGIN 
+SELECT T2.RCE_ID, T3.EQU_Nombre, T3.EQU_Ciudad, T3.EQU_Fundacion, T3.EQU_Colores FROM Campeonatos T1
+INNER JOIN Rel_Camp_Equi T2 ON
+T1.CAM_ID = T2.RCE_Campeonato
+INNER JOIN Equipos T3 ON
+T2.RCE_Equipo = T3.EQU_ID
+WHERE T1.CAM_ID = Cod;
+END $$
+DELIMITER ;
+
+/* Ingresa un Registro en la tabla Campeonatos - Equipos */
+DELIMITER $$
+CREATE PROCEDURE SP_Insert_CampEqu(IN Camp INTEGER, IN Equipo INTEGER)
+BEGIN
+INSERT INTO Rel_Camp_Equi() VALUES(null, Camp, Equipo);
+END $$
+DELIMITER ;
+
+/* Elimina un registro en la tabla Campeonatos - Equipos */
+DELIMITER $$
+CREATE PROCEDURE SP_Delete_CampEqu(IN Cod INT)
+BEGIN 
+DELETE FROM Rel_Camp_Equi WHERE RCE_ID = Cod;
+END $$
+DELIMITER ;
 
 /* Tabla Partidos */
 CREATE TABLE Partidos (

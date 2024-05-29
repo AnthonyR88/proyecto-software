@@ -7,15 +7,12 @@ require_once('controller.php');
 /* Incluye el modelo del usuario */
 require_once('../model/modelo_campeonatos.php');
 
-/* 
-if (isset($_POST['submit_asignacion'])) 
+/* Valida autorizaciones de acceso */
+if (!$_SESSION['Cargo'] == 'Administrador')
 {
-	/* Crea variables SESSION para llevarlas a el formulario de asignaciones
-	$_SESSION['user'] = $_POST['Codigo'];
-	$_SESSION['name'] = $_POST['Nombre']." ".$_POST['Apellido'];
-	/* Redidige a la vista de asignacion 
-	header('location:../view/asignacion.php');
-} */
+	/* Redidige a el menú principal */
+	header('location:../view/index.php');
+}
 
 /* Crea una variable SESSION que permite mostrar la tabla de los usuarios */
 if (isset($_GET['consultar']) AND $_SESSION['Cargo'] == 'Administrador')
@@ -99,6 +96,48 @@ if (isset($_GET['Inactivar']) AND $_SESSION['Cargo'] == 'Administrador')
 	else
 	{
 		$_SESSION['aviso'] = "<script type='text/javascript'> alert('Error, No se pudo Inactivar el Campeonato'); </script>";
+	}
+}
+
+/* */
+if (isset($_POST['submit_equipo']))
+{
+	$camp = $_POST['Codigo'];
+	$equipo = $_POST['Equipos'];
+
+	$mysqli_crear_campequ = new Campeonato();
+	$fila1 = $mysqli_crear_campequ->Val_CampEqu($camp, $equipo);
+
+	if ($fila1[0] != 0) 
+	{
+		$_SESSION['aviso'] = "<script type='text/javascript'> alert('Error, Equipo ya Registrado'); </script>";
+	}
+	else
+	{
+		if ($mysqli_crear_campequ->Crear_CampEqu($camp, $equipo)) 
+		{
+			$_SESSION['aviso'] = "<script type='text/javascript'> alert('Equipo Agregado al campeonato con Éxito'); </script>";
+		}
+		else
+		{
+			$_SESSION['aviso'] = "<script type='text/javascript'> alert('Error, No se pudo Agregar el Equipo al campeonato'); </script>";
+		}
+	}
+}
+
+/* Codigo para inactivar un usuario */
+if (isset($_GET['Eliminar'])) 
+{
+	$id = $_GET['Eliminar'];
+
+	$mysqli_eliminar = new Campeonato();
+	if ($mysqli_eliminar->Eliminar_CampEqu($id)) 
+	{
+		$_SESSION['aviso'] = "<script type='text/javascript'> alert('Equipo Eliminado de campeonato con Éxito'); </script>";
+	}
+	else
+	{
+		$_SESSION['aviso'] = "<script type='text/javascript'> alert('Error, No se pudo Eliminar el Equipo del Campeonato'); </script>";
 	}
 }
 

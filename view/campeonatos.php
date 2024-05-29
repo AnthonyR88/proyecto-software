@@ -8,6 +8,13 @@ require_once('../controller/controller.php');
 require_once('../model/modelo_campeonatos.php');
 $nav = 3;
 
+/* Valida autorizaciones de acceso */
+if (!$_SESSION['Cargo'] == 'Administrador')
+{
+	/* Redidige a la vista de campeonatos */
+	header('location:../view/index.php');
+}
+
 /* Muestra un aviso que envia el controlador */
 if (isset($_SESSION['aviso'])) 
 {
@@ -194,14 +201,34 @@ include('navbar.php');
 			}
 			else
 			{
+				$mysqli_mod = new Campeonato();
+				$fila1 = $mysqli_mod->Consultar_Campeonato($_GET['equipo']);
 			?>
+
+			<!-- etiqueta para agrupar elementos --> 
+			<div hidden class="form-group">
+				<!-- label para mostrar un texto -->
+				<label for="codigo_usuario">Código Del Campeonato</label>
+				<!-- etiqueta para campo de texto -->
+				<input name="Codigo" type="text" class="form-control" id="codigo_usuario" placeholder="Digite el codigo" required="" readonly="" value="<?php if(isset($fila1[0])){ echo $fila1[0]; } ?>">
+			<!-- cierre de la etiqueta de agrupar elementos -->
+			</div>
+
+			<!-- etiqueta para agrupar elementos --> 
+			<div class="form-group">
+				<!-- label para mostrar un texto -->
+				<label for="user_usuario">Nombre</label>
+				<!-- etiqueta para campo de texto -->
+				<input disabled="" name="Nombre" type="text" class="form-control" id="user_usuario" title="Entre 10 y 50 caracteres" value="<?php if(isset($fila1[1])){ echo $fila1[1]; } ?>" >
+			<!-- cierre de la etiqueta de agrupar elementos -->
+			</div>
 
 			<!-- etiqueta para agrupar elementos --> 
 			<div class="form-group">
 				<!-- label para mostrar un texto -->
 				<label for="tipo_usuario">Equipos</label>	
 				<!-- etiqueta para lista desplegable -->
-				<select name="Equipos" class="form-control" id="tipo_usuario">
+				<select name="Equipos" class="form-control" id="tipo_usuario" required="">
 					<option value="">Seleccione uno</option>
 				
 				<?php
@@ -237,7 +264,7 @@ include('navbar.php');
 		<!-- etiqueta para agrupar elementos --> 
 		<div class="container" id="boton">
 			<?php
-			if ($_SESSION['Cargo'] == 'Administrador' AND !isset($_GET['Modificar'])) 
+			if (!isset($_GET['Modificar']) AND !isset($_GET['equipo'])) 
 			{
 			?>
 
@@ -257,7 +284,7 @@ include('navbar.php');
 			<button type="submit" name="submit_modificar" class="btn btn-success" id="botones">Actualizar Campeonato</button><br>
 
 			<!-- Botón Para Agregar Equipo A Campeonato -->
-			<a href="campeonatos.php?equipo=''" class="btn btn-warning" id="botones">Agregar Equipo</a><br>
+			<a href="campeonatos.php?equipo=<?php echo $_GET['Modificar'] ?>" class="btn btn-warning" id="botones">Agregar Equipo</a><br>
 
 			<!-- Botón Para Actualizar Usuario -->
 			<button type="submit" name="submit_proceso" class="btn btn-warning" id="botones" onclick="return confirm('¿Estas seguro de generar Campeonato?');">Generar Campeonato</button><br>
@@ -266,24 +293,22 @@ include('navbar.php');
 			}
 			?>
 
-			<?php /*
-			if ($cargo_estud == 'Estudiante' AND $_SESSION['Cargo'] == 'Administrador') 
+			<?php
+			if (isset($_GET['equipo'])) 
 			{
 			?>
-			<!-- botones de los procesos de las clases -->
-			<button type="submit" name="submit_asignacion" class="btn btn-success" id="botones">Registrar Asignación</button><br>
-			<!-- botones de los procesos de las clases -->
-			<button type="submit" name="submit_seguimiento" class="btn btn-success" id="botones">Registrar Seguimiento</button>
+			<!-- botón para agregar equipo al campeonato -->
+			<button type="submit" name="submit_equipo" class="btn btn-success" id="botones">Registrar Equipo</button><br>
 			<?php
 			}
-			*/ ?>
+			?>
 
 		<!-- cierre de la etiqueta de agrupar elementos -->
 		</div>
 	<!-- cierre de la etiqueta del formulario -->
 	</form>
 
-	<!-- Tabla que muestra todos los registros de la tabla usuario -->
+	<!-- Tabla que muestra todos los registros de la tabla campeonatos -->
 	<?php
 
 	if (isset($_SESSION['consultar_campeonatos'])) 
@@ -307,11 +332,8 @@ include('navbar.php');
         <tbody>
             <?php 
 
-            #if (isset($res))
-            #{
             	$mysqli_cons = new Campeonato();
   				$res = $mysqli_cons->Consultar_Campeonatos();
-            #}
             
             while ($camp = mysqli_fetch_array($res,MYSQLI_BOTH)) 
             {   
@@ -335,7 +357,7 @@ include('navbar.php');
 
 	<?php
 	}
-	elseif ($_SESSION['Cargo'] == 'Administrador') 
+	elseif ($_SESSION['Cargo'] == 'Administrador' AND !isset($_GET['equipo'])) 
 	{   
 	?>
 
@@ -345,6 +367,51 @@ include('navbar.php');
 	<?php
 	}
 	unset($_SESSION['consultar_campeonatos']);
+	?>
+
+	<!-- Tabla que muestra todos los registros de la tabla campeonatos -->
+	<?php
+
+	if (isset($_GET['equipo'])) 
+	{
+	?>
+
+	<div class="table-responsive">
+	<table id="tabla" class="table table-striped table-bordered table-hover w-auto">
+	    <thead>
+	        <tr class="table-active">
+                <th>Nombre</td>
+                <th>Ciudad</td>
+                <th>Año</td>
+                <th>Colores</td>
+				<th>Eliminar</td>
+	        </tr>
+	    </thead>
+        <tbody>
+            <?php 
+
+            	$mysqli_cons = new Campeonato();
+  				$res = $mysqli_cons->Consultar_CampEqu($_GET['equipo']);
+            
+            while ($camp = mysqli_fetch_array($res,MYSQLI_BOTH)) 
+            {   
+            	?>
+                <tr>
+                	<td><?php echo $camp[1] ?></td>
+                	<td><?php echo $camp[2] ?></td>
+                	<td><?php echo $camp[3] ?></td>
+                	<td><?php echo $camp[4] ?></td>
+                	<td><a onclick="return confirm('¿Estas seguro de Inactivar este registro?');" href="../controller/controlador_campeonatos.php?Eliminar='<?php echo $camp[0] ?>'" class='btn btn-danger'>Eliminar</a></td>
+                </tr>
+                <?php
+            }
+            ?>
+        </tbody>
+	</table>
+	</div>
+
+	<?php
+	}
 	?>
 
 <!-- cierre del cuerpo del documento -->

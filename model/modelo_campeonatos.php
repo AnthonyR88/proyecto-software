@@ -47,7 +47,7 @@ class Campeonato
         return $res;
     }
 
-    /* Funcion que permite Consultar un unico Usuario */
+    /* Funcion que permite Consultar un única campeonato */
     Public function Consultar_Campeonato($id)
     {      
         $sql = " CALL SP_Select_Campeonato($id) ";
@@ -61,10 +61,66 @@ class Campeonato
         }
     }
 
-    /* Funcion que permite Inactivar Usuarios */
+    /* Funcion que permite Inactivar Campeonatos */
     Public function Inactivar_Campeonato($id)
     {      
         $sql = " CALL SP_Inactivate_Campeonatos($id) ";
+        if (sql_accion($sql)) 
+        {
+            return(true);
+        }
+        else
+        {
+            return(false);
+        }
+    }
+
+    /* Funcion que permite Consultar listado */
+    Public function Consultar_CampEqu($id)
+    {      
+        $sql = " CALL SP_Select_CampEqu($id) ";
+        if ($fila = sql_consulta2($sql)) 
+        {
+            return($fila);
+        }    
+        else
+        {
+            return(false);
+        }
+    }
+
+    /* Funcion que permite Crear relación entre campeonato y equipo */
+    Public function Crear_CampEqu($camp, $equipo)
+    {      
+        $sql = " CALL SP_Insert_CampEqu($camp, $equipo) ";
+        if (sql_accion($sql)) 
+        {
+            return(true);
+        }
+        else
+        {
+            return(false);
+        }
+    }
+
+    /* Funcion que permite Validar */
+    Public function Val_CampEqu($camp, $equipo)
+    {      
+        $sql = " SELECT COUNT(*) FROM Rel_Camp_Equi WHERE RCE_Campeonato = $camp AND RCE_Equipo = $equipo ";
+        if ($fila = sql_consulta1($sql)) 
+        {
+            return($fila);
+        }
+        else
+        {
+            return(false);
+        }
+    }
+
+    /* Funcion que permite Crear relación entre campeonato y equipo */
+    Public function Eliminar_CampEqu($id)
+    {      
+        $sql = " CALL SP_Delete_CampEqu($id) ";
         if (sql_accion($sql)) 
         {
             return(true);
